@@ -13,7 +13,8 @@ function DateFormat(date_var){
     return d.toLocaleDateString('en-US', options);
 }
 
-function RenderComments({comments}){
+function RenderComments({comments,dishId,addComment}){
+    //console.log(dishId);
     const allComments = comments.map((comment) =>{ 
         return(
             <li key={comment.id}>
@@ -28,7 +29,7 @@ function RenderComments({comments}){
             <ul className="list-unstyled">
                 {allComments}
             </ul>
-            <CommentForm />
+            <CommentForm dishId = {dishId} addComment={addComment}/>
         </div>
     );
             
@@ -75,7 +76,7 @@ function Dishdetail(props){
                     <div  className="col-12 col-md-5 m-1">
                         <RenderDish dish={props.dish} />
                     </div>
-                    <RenderComments comments={props.comments}/>                    
+                    <RenderComments comments={props.comments} dishId={props.dish.id} addComment={props.addComment}/>                    
                 </div>
             </div>
         );
@@ -103,8 +104,7 @@ class CommentForm extends Component{
 
     handleSubmit(values,event) {
         event.preventDefault();
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
     }
 
     render(){
