@@ -1,9 +1,8 @@
 import React , {Component}from 'react';
 import { Breadcrumb, BreadcrumbItem,
     Button, Row, Col, Label } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, Form, Errors, actions} from 'react-redux-form';
 import {Link} from 'react-router-dom';
-import { render } from '@testing-library/react';
 
 
 
@@ -22,9 +21,10 @@ class Contact extends Component{
     }
 
     handleSubmit(values,event) {
-        event.preventDefault();
+        //event.preventDefault();
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
     render(){
@@ -69,7 +69,7 @@ class Contact extends Component{
                         <h3>Send us your Feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <LocalForm onSubmit={(values,event) => this.handleSubmit(values,event)}> 
+                        <Form model="feedback" onSubmit={(values,event) => this.handleSubmit(values,event)}> 
                             <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -192,7 +192,7 @@ class Contact extends Component{
                                     </Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     </div>
                 </div>
             </div>
