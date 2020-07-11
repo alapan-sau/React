@@ -14,7 +14,7 @@ function DateFormat(date_var){
     return d.toLocaleDateString('en-US', options);
 }
 
-function RenderComments({comments,dishId,addComment}){
+function RenderComments({comments,dishId,postComment}){
     //console.log(dishId);
     const allComments = comments.map((comment) =>{ 
         return(
@@ -30,7 +30,7 @@ function RenderComments({comments,dishId,addComment}){
             <ul className="list-unstyled">
                 {allComments}
             </ul>
-            <CommentForm dishId = {dishId} addComment={addComment}/>
+            <CommentForm dishId = {dishId} postComment={postComment}/>
         </div>
     );
             
@@ -95,7 +95,7 @@ function Dishdetail(props){
                     <div  className="col-12 col-md-5 m-1">
                         <RenderDish dish={props.dish} />
                     </div>
-                    <RenderComments comments={props.comments} dishId={props.dish.id} addComment={props.addComment}/>                    
+                    <RenderComments comments={props.comments} dishId={props.dish.id} postComment={props.postComment}/>                    
                 </div>
             </div>
         );
@@ -123,7 +123,7 @@ class CommentForm extends Component{
 
     handleSubmit(values,event) {
         event.preventDefault();
-        this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.yourname, values.comment);
     }
 
     render(){
