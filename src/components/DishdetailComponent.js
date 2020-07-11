@@ -5,7 +5,7 @@ import {Breadcrumb, BreadcrumbItem, Modal, ModalBody, ModalHeader, Label,  Row, 
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
-
+import {baseUrl} from '../shared/baseUrl'; 
 
 function DateFormat(date_var){
     var d = new Date(date_var);
@@ -40,7 +40,7 @@ function RenderDish({dish}){
     if (dish != null)
         return(
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
